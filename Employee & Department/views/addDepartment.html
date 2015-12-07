@@ -1,0 +1,45 @@
+<div class="modal-content">
+	<div class="modal-header">
+				<h3 class="modal-title">Add Department</h3>
+				<button data-dismiss="modal" class="close" ng-click="cancel()">×</button>
+	</div>
+	<div class="modal-body">
+		<form name='deptForm' ng-submit="submitDept()" novalidate>
+			<table>
+				<tr>
+					<th colspan=2>Department Details</th>
+					
+				</tr>
+				<tr>
+					<td>Department Name: * </td>
+					<td><input type="text" name="deptName" ng-model="dept.deptName" ng-pattern="/^[A-Z,a-z]+$/" required /> 
+						<span ng-show="deptForm.deptName.$error.pattern">Not a valid Department Name!</span>
+						<span ng-show="deptForm.deptName.$error.required">This field is required!</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>Department Location: * </td>
+					<td><input type="text" name="deptLoc" ng-model="dept.deptLoc" ng-pattern="/^[A-Z,a-z]+$/" required /> 
+						<span ng-show="deptForm.deptLoc.$error.pattern">Not a valid Location!</span>
+						<span ng-show="deptForm.deptLoc.$error.required">This field is required!</span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td> <input type="submit" value="Submit" class="btn btn-primary"  /></td>
+					<td><input type="button" value="Reset" ng-click="reset()" class="btn btn-warning" /></td>
+				</tr>
+				<tr>
+					<th colspan=2 align="center">* marked fields are mandatory
+					<uib-alert ng-repeat="alert in alerts" close="closeAlert($index)" dismiss-on-timeout=2000 class="alert alert-danger">{{alert.msg}}</uib-alert>
+					</th>
+					
+				</tr>
+				
+				</table>
+		</form>
+		
+	</div>
+
+</div>

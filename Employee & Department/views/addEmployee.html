@@ -1,0 +1,52 @@
+<div class="modal-content">
+
+	<div class="modal-header">
+				<h3 class="modal-title">Add Employee</h3>
+				<button data-dismiss="modal" class="close" ng-click="cancel()">×</button>
+	</div>
+	<div class="modal-body" ng-controller="empController">
+		<form name='userForm' ng-submit="submitEmp()" novalidate>
+		<table>
+			<tr>
+				<th colspan=2>Employee Details</th>
+			</tr>
+			<tr>
+				<td>First Name: * </td>
+				<td><input type="text" name="firstName" ng-model="user.firstName" ng-pattern="/^[A-Z,a-z]+$/" required class="text"/> 
+					<span ng-show="userForm.firstName.$error.pattern">Not a valid Name!</span>
+					<span ng-show="userForm.firstName.$error.required">This field is required!</span>
+				</td>
+			</tr>
+			<tr>
+				<td>Last Name: * </td>
+				<td><input type="text" name="lastName" ng-model="user.lastName" ng-pattern="/^[A-Z,a-z]+$/" required /> 
+					<span ng-show="userForm.lastName.$error.pattern">Not a valid Name!</span>
+					<span ng-show="userForm.lastName.$error.required">This field is required!</span>
+				</td>
+			</tr>
+			<tr>
+				<td>DOB: </td>
+				<td><input type="date"  ng-model="user.DOB" /> </td>
+			</tr>
+			<tr>
+				<td>Email: * </td>
+				<td><input type="email" name="userEmail"  ng-model="user.email" required /> 
+					<span ng-show="userForm.userEmail.$error.email">Not a valid Email!</span>
+					<span ng-show="userForm.userEmail.$error.required">This field is required!</span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td> <input type="submit" value="Submit" class="btn btn-primary" /></td>
+				<td><input type="button" value="Reset" ng-click="reset()" class="btn btn-warning" /></td>
+			</tr>
+			<tr>
+				<th colspan=2 align="center">* marked fields are mandatory 
+					<uib-alert ng-repeat="alert in alerts" close="closeAlert($index)" dismiss-on-timeout=2000 class="alert alert-danger">{{alert.msg}}</uib-alert>	
+				</th>
+			</tr>
+			</table>
+		</form>
+		
+	</div>
+</div>

@@ -1,0 +1,20 @@
+
+[
+		{
+			"deptID":"1",
+			"deptName":"HR",
+			"location":"Pune"
+		},
+		
+		{
+			"deptID":"2",
+			"deptName":"IT",
+			"location":"Mumbai"
+		},	
+		
+		{
+			"deptID":"3",
+			"deptName":"Sales",
+			"location":"Pune"
+		}
+]

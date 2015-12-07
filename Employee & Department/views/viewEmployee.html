@@ -1,0 +1,29 @@
+	
+<div>
+	<button class="btn btn-primary" ng-click="showAddEmpModalPopup()" >Add Emp</button>
+	<button class="btn btn-primary" ng-click="viewEmpList()">View Employee List</button>
+	
+	<table border=2>
+		<tr>
+			<th colspan=5> Employee List </th>
+		</tr>
+		<tr>
+			<th> Employee ID </th>
+			<th> First Name </th>
+			<th> Last Name </th>
+			<th> DOB </th>
+			<th> Email </th>
+		</tr>
+		<tr ng-repeat="x in userList track by $index">
+			<td>{{x.empID}} </td>
+			<td>{{x.firstName}} </td>
+			<td>{{x.lastName}} </td>
+			<td>{{x.DOB}} </td>
+			<td>{{x.Email}} </td>
+			
+		</tr>
+		<tr ng-show="userList.length == 0">
+				<td colspan=5>{{empMessage}}</td>
+		</tr>
+	</table>
+</div>

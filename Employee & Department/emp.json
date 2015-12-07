@@ -1,0 +1,34 @@
+
+[
+		{
+			"empID":"1",
+			"firstName":"Akash",
+			"lastName":"Singh",
+			"DOB":"1-Aug-1991",
+			"Email":"akash@a.com"
+		},
+		
+		{
+			"empID":"2",
+			"firstName":"Ramesh",
+			"lastName":"Singh",
+			"DOB":"1-Aug-1990",
+			"Email":"ramesh@a.com"
+		},
+		
+		{
+			"empID":"3",
+			"firstName":"Ajay",
+			"lastName":"Sharma",
+			"DOB":"1-Oct-1990",
+			"Email":"ramesh@a.com"
+		},
+		
+		{
+			"empID":"4",
+			"firstName":"Ram",
+			"lastName":"Malhotra",
+			"DOB":"1-Aug-1989",
+			"Email":"ram@a.com"
+		}
+]
