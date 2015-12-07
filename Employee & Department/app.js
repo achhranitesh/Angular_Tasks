@@ -11,6 +11,7 @@ app.run(function($rootScope) {
 	$rootScope.did = 1;
 	$rootScope.userList=[];
 	$rootScope.deptList=[];
+	$rootScope.loggedInUser='';
 })
 
 /**
@@ -18,6 +19,13 @@ app.run(function($rootScope) {
 */
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
+		when('/', {
+		   templateUrl: 'views/login.html',
+		   controller:'loginController'
+		}).
+		when('/home', {
+		   templateUrl: 'views/menu.html'
+		}).
 		when('/viewDept', {
 		   templateUrl: 'views/viewDepartment.html',
 		   controller:'deptController'
@@ -33,5 +41,6 @@ app.config(['$routeProvider', function($routeProvider) {
 		when('/viewEmp', {
 		   templateUrl: 'views/viewEmployee.html',
 		   controller:'empController'
-		});	
+		});
+		
  }]);
