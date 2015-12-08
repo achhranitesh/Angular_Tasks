@@ -6,15 +6,15 @@
 				<th colspan=2>Login</th>
 			</tr>
 			<tr>
-				<td>User Name:  </td>
-				<td><input type="text" name="userName" ng-model="userName" ng-pattern="/^[A-Z,a-z]+$/" required class="text"/> 
-					<span ng-show="loginForm.userName.$error.pattern">Not a valid Name!</span>
-					<span ng-show="loginForm.userName.$error.required">This field is required!</span>
+				<td>User Name:(Your Email ID)  </td>
+				<td><input type="text" name="userName" ng-model="userName" emailv class="text"/> 
+					<span ng-show="loginForm.userName.$error.emailv">Not a valid Email ID!</span>
+					
 				</td>
 			</tr>
 			<tr>
 				<td>Password:  </td>
-				<td><input required type="password" name="userPass" ng-model="password" rpassword  /> 
+				<td><input type="text" name="userPass" ng-model="password" rpassword  /> 
 					<span ng-show="loginForm.userPass.$error.rpassword">Not a valid Password!</span>
 				</td>
 			</tr>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<th colspan=2 align="center">* marked fields are mandatory 
-					<uib-alert ng-repeat="alert in alerts" dismiss-on-timeout=500 class="alert alert-danger">{{alert.msg}}</uib-alert>	
+					<uib-alert ng-repeat="alert in alerts" close="closeAlert($index)" dismiss-on-timeout=2000 class="alert alert-danger">{{alert.msg}}</uib-alert>	
 				</th>
 			</tr>
 			</table>
