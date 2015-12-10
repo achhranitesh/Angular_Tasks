@@ -13,7 +13,13 @@ app.controller('empController', function ($rootScope,$scope,employees,$filter,$u
 	});*/
 	$scope.alerts = ''; // For Displaying Alerts
 	$scope.user='';
+	
+	$scope.sortType     = 'empID'; // set the default sort type
+	$scope.sortReverse  = false;  // set the default sort order
+	$scope.searchEmp   = '';     // set the default search/filter term
+	
 	$scope.viewEmpList = function () {
+		
 		employees.empList(function(employees){
 			$rootScope.userList = employees;		
 		}, function(error){

@@ -12,6 +12,7 @@ app.run(function($rootScope) {
 	$rootScope.userList=[];
 	$rootScope.deptList=[];
 	$rootScope.loggedInUser='';
+	$rootScope.loading=true;
 })
 
 /**

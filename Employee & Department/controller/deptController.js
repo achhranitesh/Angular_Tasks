@@ -15,6 +15,10 @@ app.controller('deptController', function ($rootScope,$scope,department,$uibModa
 	}
 	$scope.alerts = []; // For Displaying Alerts
 	$scope.dept='';
+	
+	$scope.sortType     = 'deptID'; // set the default sort type
+	$scope.sortReverse  = false;  // set the default sort order
+	$scope.searchDept   = '';     // set the default search/filter term
 	/**
 	* Submit Function 
 	*/

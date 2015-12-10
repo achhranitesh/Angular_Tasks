@@ -3,19 +3,55 @@
 	<h1>Employee Details</h1>
 	<button class="btn btn-primary" ng-click="showAddEmpModalPopup()" >Add Emp</button>
 	<button class="btn btn-primary" ng-click="viewEmpList()">View Employee List</button>
-	
+	<form>
+		<div class="form-group">
+		  <div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input type="text" class="form-control" placeholder="Search Employee" ng-model="searchEmp"></input>
+		  </div>      
+		</div>
+	</form>
 	<table border=2>
 		<tr>
 			<th colspan=5> Employee List </th>
 		</tr>
 		<tr>
-			<th> Employee ID </th>
-			<th> First Name </th>
-			<th> Last Name </th>
-			<th> DOB </th>
-			<th> Email </th>
+			<th> 
+				<a href="" ng-click="sortType = 'empID'; sortReverse = !sortReverse">
+					Employee ID 
+						<span ng-show="sortType == 'empID' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'empID' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			</th>
+			<th> 
+				<a href="" ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
+					First Name
+						<span ng-show="sortType == 'firstName' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'firstName' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			</th>
+			<th> 
+				<a href="" ng-click="sortType = 'lastName'; sortReverse = !sortReverse">
+					Last Name
+						<span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			</th>
+			<th> 
+				<a href="" ng-click="sortType = 'DOB'; sortReverse = !sortReverse">
+					DOB
+						<span ng-show="sortType == 'DOB' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'DOB' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			</th><th> 
+				<a href="" ng-click="sortType = 'Email'; sortReverse = !sortReverse">
+					Email
+						<span ng-show="sortType == 'Email' && !sortReverse" class="fa fa-caret-down"></span>
+						<span ng-show="sortType == 'Email' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			</th>
 		</tr>
-		<tr ng-repeat="x in userList track by $index">
+		<tr ng-repeat="x in userList | orderBy:sortType:sortReverse | filter:searchEmp">
 			<td>{{x.empID}} </td>
 			<td>{{x.firstName}} </td>
 			<td>{{x.lastName}} </td>
