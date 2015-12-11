@@ -2,18 +2,13 @@
 * The Controller is Defined for Employee Related Transactions
 * Author : Nitesh Achhra
 * Date: 04 Decemeber 2015
+* Updated : 11 December 2015
 */
 app.controller('empController', function ($rootScope,$scope,employees,$filter,$uibModal) {
 	
-	/*employees.empList(function(employees){
-		$rootScope.userList=employees;		
-	}, function(error){
-		$rootScope.userList = [];
-			$scope.empMessage="No data available";
-	});*/
 	$scope.alerts = ''; // For Displaying Alerts
 	$scope.user='';
-	
+	$scope.edit=0; 
 	$scope.sortType     = 'empID'; // set the default sort type
 	$scope.sortReverse  = false;  // set the default sort order
 	$scope.searchEmp   = '';     // set the default search/filter term
@@ -82,4 +77,48 @@ app.controller('empController', function ($rootScope,$scope,employees,$filter,$u
 	$scope.cancel = function () {
 		$rootScope.modalInstance.dismiss('cancel');
 	};	
+	
+	/**
+	* Remove Row Function-- Only Removes from the Table, Values are present in Local Storage
+	*/
+	$scope.removeRow = function(id){				
+		var index = -1;		
+		var empR = eval( $scope.userList );
+		for( var i = 0; i < empR.length; i++ ) {
+			if( empR[i].empID === id ) {
+				index = i;
+				break;
+			}
+		}
+		if( index === -1 ) {
+			alert( "Something gone wrong" );
+		}
+		$scope.userList.splice( index, 1 );		
+	};
+	
+	/**
+	* Editing the Record
+	*/
+	$scope.editEmp = function (index) {
+		$scope.edit=1;
+		$scope.index = index;
+		$scope.emp = $scope.userList[index];
+    }; 
+	/**
+	* Updating the Record
+	*/
+	$scope.updateEmp = function () {
+		$scope.userList[$scope.index]=$scope.emp;
+		localStorage.setItem('userList', JSON.stringify($scope.userList));
+		$scope.edit=0;
+    };
+	
+	/**
+	* Cancel Update
+	*/
+	$scope.cancelUpdate = function () {
+		$scope.edit=0;
+		$scope.viewEmpList();
+    };
+	
 });

@@ -1,10 +1,23 @@
 /**
-* The Controller is Defined for Department Related Transactions
+* The Controller is Defined for Department Related Add, Update & Delete Transactions
 * Author : Nitesh Achhra
 * Date: 04 Decemeber 2015
+* Updated : 11 December 2015
 */
 app.controller('deptController', function ($rootScope,$scope,department,$uibModal) {
 	
+	$scope.alerts = []; // For Displaying Alerts
+	$scope.dept='';
+	$scope.edit=0; // to set the status of Edit Panel 0- Donot Display, 1- Display
+	$scope.selected = {}; 
+	$scope.sortType     = 'deptID'; // set the default sort type
+	$scope.sortReverse  = false;  // set the default sort order
+	$scope.searchDept   = '';     // set the default search/filter term
+	
+	
+	/**
+	* Displaying the List of Department
+	*/
 	$scope.viewDeptList = function () {
 		department.deptList(function(department){
 			$rootScope.deptList = department;		
@@ -13,12 +26,6 @@ app.controller('deptController', function ($rootScope,$scope,department,$uibModa
 				$scope.deptMessage="No data available";
 		});
 	}
-	$scope.alerts = []; // For Displaying Alerts
-	$scope.dept='';
-	
-	$scope.sortType     = 'deptID'; // set the default sort type
-	$scope.sortReverse  = false;  // set the default sort order
-	$scope.searchDept   = '';     // set the default search/filter term
 	/**
 	* Submit Function 
 	*/
@@ -38,11 +45,26 @@ app.controller('deptController', function ($rootScope,$scope,department,$uibModa
 		} else {
 			//alert('Fill all Mandatory Fields');
 			$scope.alerts=[];
-			$scope.alerts.push({type:'warning',msg: 'Fill All Mandatory Fields'});
-			
+			$scope.alerts.push({type:'warning',msg: 'Fill All Mandatory Fields'});			
 		}
 	};
-	
+	/**
+	* Remove Row Function-- Only Removes from the Table, Values are present in Local Storage
+	*/
+	$scope.removeRow = function(id){				
+		var index = -1;		
+		var deptR = eval( $scope.deptList );
+		for( var i = 0; i < deptR.length; i++ ) {
+			if( deptR[i].deptID === id ) {
+				index = i;
+				break;
+			}
+		}
+		if( index === -1 ) {
+			alert( "Something gone wrong" );
+		}
+		$scope.deptList.splice( index, 1 );		
+	};
 	/** 
 	* Reset Function 
 	*/
@@ -73,4 +95,29 @@ app.controller('deptController', function ($rootScope,$scope,department,$uibModa
 	$scope.cancel = function () {
 		$rootScope.modalInstance.dismiss('cancel');
 	};
+	
+	/**
+	* Editing the Record
+	*/
+	$scope.editDept = function (index) {
+		$scope.edit=1;
+		$scope.index = index;
+		$scope.dept = $scope.deptList[index];
+    }; 
+	/**
+	* Updating the Record
+	*/
+	$scope.updateDept = function () {
+		$scope.deptList[$scope.index]=$scope.dept;
+		localStorage.setItem('deptList', JSON.stringify($scope.deptList));
+		$scope.edit=0;
+    };
+	
+	/**
+	* Cancel Update
+	*/
+	$scope.cancelUpdate = function () {
+		$scope.edit=0;
+		$scope.viewDeptList();
+    };
 });

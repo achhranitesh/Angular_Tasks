@@ -1,8 +1,11 @@
 	
 <div>
-	<h1>Department Details</h1>
-	<button class="btn btn-primary" ng-click="showAddDeptModalPopup()">Add Department</button>
-	<button class="btn btn-primary" ng-click="viewDeptList()">View Department List</button>
+	<div>
+		<h1>Department Details</h1>
+		<button class="btn btn-primary" ng-click="showAddDeptModalPopup()">Add Department</button>
+		<button class="btn btn-primary" ng-click="viewDeptList()">View Department List</button>
+		<br><br>
+	</div>
 	<form>
 		<div class="form-group">
 		  <div class="input-group">
@@ -14,7 +17,7 @@
 	
 	<table border=2 >
 		<tr>
-			<th colspan=3> Department List </th>
+			<th colspan=5> Department List </th>
 		</tr>
 		<tr>
 			<th> 
@@ -38,16 +41,40 @@
 						<span ng-show="sortType == 'location' && sortReverse" class="fa fa-caret-up"></span>
 				</a>
 			</th>
+			<th></th>
+			<th></th>
 		</tr>
 		<tr ng-repeat="x in deptList| orderBy:sortType:sortReverse | filter:searchDept">
-			<td>{{x.deptID}} </td>
-			<td>{{x.deptName}} </td>
-			<td>{{x.location}} </td>
+				<td>{{x.deptID}} </td>
+				<td>{{x.deptName}} </td>
+				<td>{{x.location}} </td>
+				<td>
+					<input type="button" ng-click="editDept($index)" class="btn btn-primary" value="Edit" ng-disabled="edit"/>
+				</td>
+				<td>
+					<input type="button" ng-click="removeRow(x.deptID)" class="btn btn-danger" value="Delete" ng-disabled="edit"/>
+				</td>
 			
 		</tr>
 		<tr ng-show="deptList.length == 0">
-			<td colspan=3>{{deptMessage}}</td>
+			<td colspan=5>{{deptMessage}}</td>
 		</tr>
+
 	</table>
+	<br>
+	<div ng-show="edit" class="panel panel-default">
+		<div class="panel panel-heading">
+			Edit Record
+		</div>
+		<div class="panel panel-body">
+			<form novalidate class="form-inline">
+				<input type="text" name="name" class ="form-control" ng-model="dept.deptName" placeholder="name" />
+				<input type="text" name="location" class ="form-control" ng-model="dept.location" placeholder="location" />
+			  
+				<input type="button" value="Update" ng-click="updateDept()" class="btn btn-primary" />
+				<input type="button" value="Cancel" ng-click="cancelUpdate()" class="btn btn-danger" />
+			</form>
+		</div>
+	</div>
 	<a href="#home">Back To Home Page</a>
 </div>

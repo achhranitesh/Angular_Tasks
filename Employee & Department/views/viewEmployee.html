@@ -1,8 +1,11 @@
 	
 <div>
-	<h1>Employee Details</h1>
-	<button class="btn btn-primary" ng-click="showAddEmpModalPopup()" >Add Emp</button>
-	<button class="btn btn-primary" ng-click="viewEmpList()">View Employee List</button>
+	<div>
+		<h1>Employee Details</h1>
+		<button class="btn btn-primary" ng-click="showAddEmpModalPopup()" >Add Emp</button>
+		<button class="btn btn-primary" ng-click="viewEmpList()">View Employee List</button>
+		<br><br>
+	</div>
 	<form>
 		<div class="form-group">
 		  <div class="input-group">
@@ -13,7 +16,7 @@
 	</form>
 	<table border=2>
 		<tr>
-			<th colspan=5> Employee List </th>
+			<th colspan=7> Employee List </th>
 		</tr>
 		<tr>
 			<th> 
@@ -50,6 +53,8 @@
 						<span ng-show="sortType == 'Email' && sortReverse" class="fa fa-caret-up"></span>
 				</a>
 			</th>
+			<th></th>
+			<th></th>
 		</tr>
 		<tr ng-repeat="x in userList | orderBy:sortType:sortReverse | filter:searchEmp">
 			<td>{{x.empID}} </td>
@@ -57,11 +62,32 @@
 			<td>{{x.lastName}} </td>
 			<td>{{x.DOB}} </td>
 			<td>{{x.Email}} </td>
-			
+			<td>
+				<input type="button" ng-click="editEmp($index)" class="btn btn-primary" value="Edit" ng-disabled="edit"/>
+			</td>
+			<td>
+				<input type="button" ng-click="removeRow(x.empID)" class="btn btn-danger" value="Delete" ng-disabled="edit"/>
+			</td>
 		</tr>
 		<tr ng-show="userList.length == 0">
-				<td colspan=5>{{empMessage}}</td>
+				<td colspan=7>{{empMessage}}</td>
 		</tr>
 	</table>
+	<br>
+	<div ng-show="edit" class="panel panel-default">
+		<div class="panel panel-heading">
+			Edit Record
+		</div>
+		<div class="panel panel-body">
+			<form novalidate class="form-inline">
+				<input type="text" name="fname" class ="form-control" ng-model="emp.firstName" placeholder="First Name" />
+				<input type="text" name="lname" class ="form-control" ng-model="emp.lastName" placeholder="Last Name" />
+				<input type="email" name="email" class ="form-control" ng-model="emp.Email" placeholder="Email" />
+				<br><br>
+				<input type="button" value="Update" ng-click="updateEmp()" class="btn btn-primary" />
+				<input type="button" value="Cancel" ng-click="cancelUpdate()" class="btn btn-danger" />
+			</form>
+		</div>
+	</div>
 	<a href="#home">Back To Home Page</a>
 </div>
